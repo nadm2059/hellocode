@@ -5,7 +5,7 @@ void fibonacci_iterative(int n) {
     
     std::cout << "Fibonacci Sequence (Iterative): ";
     for (int i = 0; i < n; i++) {
-        std::cout << a << " ";
+        std::cout << a << ", ";
         next = a + b;
         a = b;
         b = next;
