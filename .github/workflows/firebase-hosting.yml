@@ -1,0 +1,30 @@
+name: Deploy to Firebase Hosting on merge
+
+on:
+  push:
+    branches:
+      - main  # Trigger when pushing to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # Change if using another Node.js version
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Build Project (Optional for React/Vue)
+        run: npm install && npm run build  # Remove if plain HTML/CSS/JS
+
+      - name: Deploy to Firebase
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+        run: firebase deploy --only hosting
